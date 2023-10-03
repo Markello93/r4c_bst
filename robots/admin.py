@@ -5,14 +5,11 @@ from robots.models import Robot
 
 @admin.register(Robot)
 class RobotAdmin(admin.ModelAdmin):
-    """Админ модель для учета роботов."""
+    """Админ модель робота."""
 
-    list_display = (
-        "id",
-        "serial",
-        "model",
-        "version",
-        "created",
+    list_display = ('id', 'serial', 'model', 'version', 'created', 'ordered')
+    search_fields = ('serial',)
+    list_filter = (
+        'serial',
+        'ordered',
     )
-    search_fields = ("serial",)
-    list_filter = ("serial",)
