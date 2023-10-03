@@ -1,12 +1,16 @@
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from dotenv import load_dotenv
+
+load_dotenv()
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = 'mztx@x_-=gfhc9xs@bm58m&@3pc7##opo14zob!(l2tus05+jo'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+HOST = os.getenv('HOST', default='*')
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', HOST]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -15,9 +19,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'customers',
-    'orders',
-    'robots'
+    'customers.apps.CustomersConfig',
+    'orders.apps.OrdersConfig',
+    'robots.apps.RobotsConfig'
 ]
 
 MIDDLEWARE = [
@@ -85,3 +89,21 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
+
+
+ORDER_STATUS = [
+    ('CREATED', 'created'),
+    ('NO_ROBOT_IN_STOCK', 'no_robot_in_stock'),
+    ('READY', 'ready'),
+]

@@ -1,3 +1,15 @@
 from django.contrib import admin
 
-# Register your models here.
+from customers.models import Customer
+
+
+@admin.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
+    """Админ модель для клиентов."""
+
+    list_display = (
+        'id',
+        'email',
+    )
+    search_fields = ('email',)
+    list_filter = ('email',)
