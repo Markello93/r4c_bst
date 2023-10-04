@@ -14,12 +14,22 @@ git clone https://github.com/Markello93/r4c_bst.git
 ```
 cd R4C
 ```
-Установить зависимости и активировать виртуальное окружение:
+Установить зависимости и активировать виртуальное окружение c помощью poetry:
 ```
 poetry install
 ```
 ```
 source .venv/Scripts/activate
+```
+Или установить зависимости и активировать виртуальное окружение c помощью pip:
+```
+python -m venv venv
+```
+```
+source venv/Scripts/activate
+```
+```
+pip install requirements.txt
 ```
 Выполнить миграции:
 ```
